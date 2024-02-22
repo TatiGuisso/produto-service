@@ -1,6 +1,6 @@
-package com.grupo16.produtoservice.gateway.mysql.repository;
+package com.grupo16.produtoservice.gateway.database.mysql.repository;
 
-import com.grupo16.produtoservice.gateway.mysql.entity.ProdutoEntity;
+import com.grupo16.produtoservice.gateway.database.mysql.entity.ProdutoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

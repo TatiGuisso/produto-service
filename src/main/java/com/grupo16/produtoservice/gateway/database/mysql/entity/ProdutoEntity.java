@@ -1,4 +1,4 @@
-package com.grupo16.produtoservice.gateway.mysql.entity;
+package com.grupo16.produtoservice.gateway.database.mysql.entity;
 
 import com.grupo16.produtoservice.domain.Produto;
 import com.grupo16.produtoservice.domain.Status;
