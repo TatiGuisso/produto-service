@@ -1,6 +1,7 @@
 package com.grupo16.produtoservice.gateway.database.mysql.impl;
 
 import com.grupo16.produtoservice.domain.Produto;
+import com.grupo16.produtoservice.exception.ErroAoAcessarBancoDadosException;
 import com.grupo16.produtoservice.gateway.database.ProdutoRepositoryGateway;
 import com.grupo16.produtoservice.gateway.database.mysql.entity.ProdutoEntity;
 import com.grupo16.produtoservice.gateway.database.mysql.repository.ProdutoRepository;
@@ -29,7 +30,7 @@ public class ProdutoRepositoryGatewayImpl implements ProdutoRepositoryGateway {
             return produtoRepository.save(produtoEntity).getId();
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            throw new RuntimeException("Erro ao salvar produto", e); // TODO: Implementar tratamento de erro
+            throw new ErroAoAcessarBancoDadosException();
         }
     }
 }
