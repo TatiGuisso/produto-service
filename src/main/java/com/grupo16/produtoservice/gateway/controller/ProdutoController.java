@@ -3,6 +3,7 @@ package com.grupo16.produtoservice.gateway.controller;
 import com.grupo16.produtoservice.domain.Produto;
 import com.grupo16.produtoservice.gateway.controller.dto.ProdutoDTO;
 import com.grupo16.produtoservice.service.CriarAlterarProdutoService;
+import com.grupo16.produtoservice.service.ObterProdutoService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("produtos")
 public class ProdutoController {
 
+    private final ObterProdutoService obterProdutoService;
+
     private final CriarAlterarProdutoService criarAlterarProdutoService;
+
+
+    @GetMapping("{id}")
+    public ProdutoDTO obterPorId(@PathVariable Long id) {
+        log.trace("Start id={}", id);
+
+        ProdutoDTO produtoDto = new ProdutoDTO(obterProdutoService.obterPorId(id));
+
+        log.trace("End produtoDto={}", produtoDto);
+        return produtoDto;
+    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
