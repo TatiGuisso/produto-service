@@ -1,9 +1,13 @@
 package com.grupo16.produtoservice.gateway.controller;
 
+import com.grupo16.produtoservice.domain.Produto;
+import com.grupo16.produtoservice.gateway.controller.dto.ProdutoDTO;
+import com.grupo16.produtoservice.service.CriarAlterarProdutoService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Bruno Gomes Damascena dos santos (bruno-gds) < brunog.damascena@gmail.com >
@@ -16,4 +20,18 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RequestMapping("produtos")
 public class ProdutoController {
+
+    private final CriarAlterarProdutoService criarAlterarProdutoService;
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public Long criar(@Valid @RequestBody ProdutoDTO produtoDTO) {
+        log.trace("Start produtoDTO={}", produtoDTO);
+
+        Produto produto = produtoDTO.mapearParaProdutoDomain();
+        Long idProduto = criarAlterarProdutoService.criar(produto);
+
+        log.trace("End idProduto={}", idProduto);
+        return idProduto;
+    }
 }
