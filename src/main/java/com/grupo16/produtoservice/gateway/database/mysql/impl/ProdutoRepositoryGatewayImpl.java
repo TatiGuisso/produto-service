@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 /**
  * @author Bruno Gomes Damascena dos santos (bruno-gds) < brunog.damascena@gmail.com >
  * Date: 21/02/2024
@@ -21,6 +23,24 @@ import org.springframework.stereotype.Component;
 public class ProdutoRepositoryGatewayImpl implements ProdutoRepositoryGateway {
 
     private ProdutoRepository produtoRepository;
+
+    @Override
+    public Optional<Produto> obterPorId(Long id) {
+        try {
+            Optional<Produto> produtoOp = Optional.empty();
+            Optional<ProdutoEntity> produtoEntityOp = produtoRepository.findById(id);
+
+            if (produtoEntityOp.isPresent()) {
+                Produto produto = produtoEntityOp.get().mapearProdutoEntityParaDomain();
+                produtoOp = Optional.of(produto);
+            }
+
+            return produtoOp;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            throw new ErroAoAcessarBancoDadosException();
+        }
+    }
 
     @Override
     public Long salvar(Produto produto) {
