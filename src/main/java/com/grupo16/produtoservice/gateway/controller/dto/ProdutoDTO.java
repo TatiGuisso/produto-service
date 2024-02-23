@@ -3,8 +3,8 @@ package com.grupo16.produtoservice.gateway.controller.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.grupo16.produtoservice.domain.Produto;
 import com.grupo16.produtoservice.domain.Status;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -31,7 +31,7 @@ public class ProdutoDTO {
     @NotBlank
     private String descricao;
 
-    @NotNull
+    @DecimalMin(value = "0.0", message = "O preço deve ser maior ou igual a zero")
     private double preco;
 
     private String status;
