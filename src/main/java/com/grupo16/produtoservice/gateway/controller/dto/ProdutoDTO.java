@@ -36,6 +36,18 @@ public class ProdutoDTO {
 
     private String status;
 
+    private LocalDateTime dataCriacao;
+
+
+    public ProdutoDTO(Produto produto) {
+        this.id = produto.getId();
+        this.nome = produto.getNome();
+        this.descricao = produto.getDescricao();
+        this.preco = produto.getPreco();
+        this.status = produto.getStatus().name();
+        this.dataCriacao = produto.getDataCriacao();
+    }
+
     public Produto mapearParaProdutoDomain() {
         return Produto.builder()
                 .id(this.id)
