@@ -1,6 +1,7 @@
 package com.grupo16.produtoservice.gateway.database.mysql.impl;
 
 import com.grupo16.produtoservice.domain.Produto;
+import com.grupo16.produtoservice.domain.Status;
 import com.grupo16.produtoservice.exception.ErroAoAcessarBancoDadosException;
 import com.grupo16.produtoservice.gateway.database.ProdutoRepositoryGateway;
 import com.grupo16.produtoservice.gateway.database.mysql.entity.ProdutoEntity;
@@ -48,6 +49,32 @@ public class ProdutoRepositoryGatewayImpl implements ProdutoRepositoryGateway {
             ProdutoEntity produtoEntity = new ProdutoEntity(produto);
 
             return produtoRepository.save(produtoEntity).getId();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            throw new ErroAoAcessarBancoDadosException();
+        }
+    }
+
+    @Override
+    public void inativar(Long id) {
+        try {
+            Optional<ProdutoEntity> produtoEntityOp = produtoRepository.findById(id);
+
+            if (produtoEntityOp.isPresent()) {
+                Produto produto = produtoEntityOp.get().mapearProdutoEntityParaDomain();
+
+                if (produto.getStatus() == Status.ATIVO) {
+                    ProdutoEntity produtoInativado = new ProdutoEntity(
+                            produto.getId(),
+                            produto.getNome(),
+                            produto.getDescricao(),
+                            produto.getPreco(),
+                            1,
+                            produto.getDataCriacao());
+
+                    produtoRepository.save(produtoInativado);
+                }
+            }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new ErroAoAcessarBancoDadosException();
