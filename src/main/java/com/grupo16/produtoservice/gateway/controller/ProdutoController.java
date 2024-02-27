@@ -4,6 +4,7 @@ import com.grupo16.produtoservice.domain.Produto;
 import com.grupo16.produtoservice.gateway.controller.dto.ProdutoDTO;
 import com.grupo16.produtoservice.service.CriarAlterarProdutoService;
 import com.grupo16.produtoservice.service.ObterProdutoService;
+import com.grupo16.produtoservice.service.RemoverProdutoService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,8 @@ public class ProdutoController {
 
     private final CriarAlterarProdutoService criarAlterarProdutoService;
 
+    private final RemoverProdutoService removerProdutoService;
+
 
     @GetMapping("{id}")
     public ProdutoDTO obterPorId(@PathVariable Long id) {
@@ -47,5 +50,15 @@ public class ProdutoController {
 
         log.trace("End idProduto={}", idProduto);
         return idProduto;
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("{id}")
+    public void deletar(@PathVariable Long id) {
+        log.trace("Start id={}", id);
+
+        removerProdutoService.remover(id);
+
+        log.trace("End");
     }
 }
