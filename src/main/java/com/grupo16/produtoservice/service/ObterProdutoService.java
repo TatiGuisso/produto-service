@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -21,6 +22,11 @@ import java.util.Optional;
 public class ObterProdutoService {
 
     private final ProdutoRepositoryGateway produtoRepositoryGateway;
+
+
+    public List<Produto> obterTodosAtivos() {
+        return this.produtoRepositoryGateway.obterTodosAtivos();
+    }
 
     public Produto obterPorId(Long id) {
         Optional<Produto> produtoOp = this.produtoRepositoryGateway.obterPorId(id);
