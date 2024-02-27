@@ -54,7 +54,7 @@ public class ProdutoDTO {
                 .nome(this.nome)
                 .descricao(this.descricao)
                 .preco(this.preco)
-                .status(this.status == null ? Status.ATIVO : Status.valueOf(this.status))
+                .status(Status.ATIVO)
                 .dataCriacao(LocalDateTime.now())
                 .build();
     }
