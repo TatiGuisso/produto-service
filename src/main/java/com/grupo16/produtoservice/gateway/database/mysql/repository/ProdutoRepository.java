@@ -4,6 +4,8 @@ import com.grupo16.produtoservice.gateway.database.mysql.entity.ProdutoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author Bruno Gomes Damascena dos santos (bruno-gds) < brunog.damascena@gmail.com >
  * Date: 21/02/2024
@@ -12,4 +14,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<ProdutoEntity, Long> {
+
+    List<ProdutoEntity> findByStatus(int status);
 }
