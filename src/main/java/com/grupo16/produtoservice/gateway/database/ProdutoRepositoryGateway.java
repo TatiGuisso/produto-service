@@ -2,6 +2,7 @@ package com.grupo16.produtoservice.gateway.database;
 
 import com.grupo16.produtoservice.domain.Produto;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -11,6 +12,8 @@ import java.util.Optional;
  */
 
 public interface ProdutoRepositoryGateway {
+
+    List<Produto> obterTodosAtivos();
 
     Optional<Produto> obterPorId(Long id);
 
