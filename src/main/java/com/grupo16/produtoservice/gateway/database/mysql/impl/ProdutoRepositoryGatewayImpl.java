@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -24,6 +25,20 @@ import java.util.Optional;
 public class ProdutoRepositoryGatewayImpl implements ProdutoRepositoryGateway {
 
     private ProdutoRepository produtoRepository;
+
+
+    @Override
+    public List<Produto> obterTodosAtivos() {
+        try {
+            return produtoRepository.findByStatus(0)
+                    .stream()
+                    .map(ProdutoEntity::mapearProdutoEntityParaDomain)
+                    .toList();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            throw new ErroAoAcessarBancoDadosException();
+        }
+    }
 
     @Override
     public Optional<Produto> obterPorId(Long id) {
