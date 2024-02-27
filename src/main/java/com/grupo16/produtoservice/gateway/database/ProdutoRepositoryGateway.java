@@ -15,4 +15,6 @@ public interface ProdutoRepositoryGateway {
     Optional<Produto> obterPorId(Long id);
 
     Long salvar(Produto produto);
+
+    void inativar(Long id);
 }
