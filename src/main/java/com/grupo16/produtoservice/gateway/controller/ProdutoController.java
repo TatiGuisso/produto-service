@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author Bruno Gomes Damascena dos santos (bruno-gds) < brunog.damascena@gmail.com >
  * Date: 21/02/2024
@@ -29,6 +31,14 @@ public class ProdutoController {
 
     private final RemoverProdutoService removerProdutoService;
 
+
+    @GetMapping
+    public List<ProdutoDTO> obterTodosAtivos() {
+        return obterProdutoService.obterTodosAtivos()
+                .stream()
+                .map(ProdutoDTO::new)
+                .toList();
+    }
 
     @GetMapping("{id}")
     public ProdutoDTO obterPorId(@PathVariable Long id) {
