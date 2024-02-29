@@ -63,6 +63,17 @@ public class ProdutoController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("{id}")
+    public void alterar(@PathVariable Long id, @Valid @RequestBody ProdutoDTO produtoDTO) {
+        log.trace("Start id={}, produtoDTO={}", id, produtoDTO);
+
+        Produto produto = produtoDTO.mapearParaProdutoDomain();
+        criarAlterarProdutoService.alterar(id, produto);
+
+        log.trace("End");
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("{id}")
     public void deletar(@PathVariable Long id) {
         log.trace("Start id={}", id);
