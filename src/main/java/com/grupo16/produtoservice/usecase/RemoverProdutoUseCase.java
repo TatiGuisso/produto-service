@@ -1,4 +1,4 @@
-package com.grupo16.produtoservice.service;
+package com.grupo16.produtoservice.usecase;
 
 import com.grupo16.produtoservice.gateway.database.ProdutoRepositoryGateway;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class RemoverProdutoService {
+public class RemoverProdutoUseCase {
 
     private final ProdutoRepositoryGateway produtoRepositoryGateway;
 

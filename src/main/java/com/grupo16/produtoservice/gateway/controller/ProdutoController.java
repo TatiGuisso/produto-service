@@ -1,10 +1,12 @@
 package com.grupo16.produtoservice.gateway.controller;
 
 import com.grupo16.produtoservice.domain.Produto;
-import com.grupo16.produtoservice.gateway.controller.dto.ProdutoDTO;
-import com.grupo16.produtoservice.service.CriarAlterarProdutoService;
-import com.grupo16.produtoservice.service.ObterProdutoService;
-import com.grupo16.produtoservice.service.RemoverProdutoService;
+import com.grupo16.produtoservice.gateway.controller.json.EstoqueJson;
+import com.grupo16.produtoservice.gateway.controller.json.ProdutoJson;
+import com.grupo16.produtoservice.usecase.CriarAlterarEstoqueUseCase;
+import com.grupo16.produtoservice.usecase.CriarAlterarProdutoUseCase;
+import com.grupo16.produtoservice.usecase.ObterProdutoUseCase;
+import com.grupo16.produtoservice.usecase.RemoverProdutoUseCase;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,50 +27,63 @@ import java.util.List;
 @RequestMapping("produtos")
 public class ProdutoController {
 
-    private final ObterProdutoService obterProdutoService;
+    private final ObterProdutoUseCase obterProdutoUseCase;
 
-    private final CriarAlterarProdutoService criarAlterarProdutoService;
+    private final CriarAlterarProdutoUseCase criarAlterarProdutoUseCase;
 
-    private final RemoverProdutoService removerProdutoService;
+    private final RemoverProdutoUseCase removerProdutoUseCase;
+
+    private final CriarAlterarEstoqueUseCase criarAlterarEstoqueUseCase;
 
 
     @GetMapping
-    public List<ProdutoDTO> obterTodosAtivos() {
-        return obterProdutoService.obterTodosAtivos()
+    public List<ProdutoJson> obterTodosAtivos() {
+        return obterProdutoUseCase.obterTodosAtivos()
                 .stream()
-                .map(ProdutoDTO::new)
+                .map(ProdutoJson::new)
                 .toList();
     }
 
     @GetMapping("{id}")
-    public ProdutoDTO obterPorId(@PathVariable Long id) {
+    public ProdutoJson obterPorId(@PathVariable Long id) {
         log.trace("Start id={}", id);
 
-        ProdutoDTO produtoDto = new ProdutoDTO(obterProdutoService.obterPorId(id));
+        ProdutoJson produtoJson = new ProdutoJson(obterProdutoUseCase.obterPorId(id));
 
-        log.trace("End produtoDto={}", produtoDto);
-        return produtoDto;
+        log.trace("End produtoDto={}", produtoJson);
+        return produtoJson;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Long criar(@Valid @RequestBody ProdutoDTO produtoDTO) {
-        log.trace("Start produtoDTO={}", produtoDTO);
+    public Long criar(@Valid @RequestBody ProdutoJson produtoJson) {
+        log.trace("Start produtoDTO={}", produtoJson);
 
-        Produto produto = produtoDTO.mapearParaProdutoDomain();
-        Long idProduto = criarAlterarProdutoService.criar(produto);
+        Produto produto = produtoJson.mapearParaProdutoDomain();
+        Long idProduto = criarAlterarProdutoUseCase.criar(produto);
 
         log.trace("End idProduto={}", idProduto);
         return idProduto;
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("{idProduto}/estoque")
+    public Long criarAlterarEstoque(@PathVariable Long idProduto, @Valid @RequestBody EstoqueJson estoqueJson) {
+        log.trace("Start id={}, estoqueDTO={}", idProduto, estoqueJson);
+
+        Long idEstoque = criarAlterarEstoqueUseCase.atualizarEstoque(estoqueJson.mapearParaEstoqueDomain(idProduto));
+
+        log.trace("End idEstoque={}", idEstoque);
+        return idEstoque;
+    }
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("{id}")
-    public void alterar(@PathVariable Long id, @Valid @RequestBody ProdutoDTO produtoDTO) {
-        log.trace("Start id={}, produtoDTO={}", id, produtoDTO);
+    public void alterar(@PathVariable Long id, @Valid @RequestBody ProdutoJson produtoJson) {
+        log.trace("Start id={}, produtoDTO={}", id, produtoJson);
 
-        Produto produto = produtoDTO.mapearParaProdutoDomain();
-        criarAlterarProdutoService.alterar(id, produto);
+        Produto produto = produtoJson.mapearParaProdutoDomain();
+        criarAlterarProdutoUseCase.alterar(id, produto);
 
         log.trace("End");
     }
@@ -78,7 +93,7 @@ public class ProdutoController {
     public void deletar(@PathVariable Long id) {
         log.trace("Start id={}", id);
 
-        removerProdutoService.remover(id);
+        removerProdutoUseCase.remover(id);
 
         log.trace("End");
     }

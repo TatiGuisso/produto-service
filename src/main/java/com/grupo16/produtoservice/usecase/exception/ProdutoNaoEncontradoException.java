@@ -1,4 +1,4 @@
-package com.grupo16.produtoservice.service.exception;
+package com.grupo16.produtoservice.usecase.exception;
 
 import com.grupo16.produtoservice.exception.SystemBaseException;
 import lombok.Getter;

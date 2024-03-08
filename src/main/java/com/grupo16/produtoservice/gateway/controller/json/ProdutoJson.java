@@ -1,4 +1,4 @@
-package com.grupo16.produtoservice.gateway.controller.dto;
+package com.grupo16.produtoservice.gateway.controller.json;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.grupo16.produtoservice.domain.Produto;
@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ProdutoDTO {
+public class ProdutoJson {
 
     private Long id;
 
@@ -39,7 +39,7 @@ public class ProdutoDTO {
     private LocalDateTime dataCriacao;
 
 
-    public ProdutoDTO(Produto produto) {
+    public ProdutoJson(Produto produto) {
         this.id = produto.getId();
         this.nome = produto.getNome();
         this.descricao = produto.getDescricao();
