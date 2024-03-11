@@ -66,6 +66,7 @@ public class ProdutoController {
         return idProduto;
     }
 
+    //FIXME: Este endpoint deveria estar em "estoque-service" - VERIFICADO QUE JA EXISTE EM ESTOQUE-SERVICE
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("{idProduto}/estoque")
     public Long criarAlterarEstoque(@PathVariable Long idProduto, @Valid @RequestBody EstoqueJson estoqueJson) {
