@@ -1,9 +1,7 @@
 package com.grupo16.produtoservice.gateway.controller;
 
 import com.grupo16.produtoservice.domain.Produto;
-import com.grupo16.produtoservice.gateway.controller.json.EstoqueJson;
 import com.grupo16.produtoservice.gateway.controller.json.ProdutoJson;
-import com.grupo16.produtoservice.usecase.CriarAlterarEstoqueUseCase;
 import com.grupo16.produtoservice.usecase.CriarAlterarProdutoUseCase;
 import com.grupo16.produtoservice.usecase.ObterProdutoUseCase;
 import com.grupo16.produtoservice.usecase.RemoverProdutoUseCase;
@@ -32,8 +30,6 @@ public class ProdutoController {
     private final CriarAlterarProdutoUseCase criarAlterarProdutoUseCase;
 
     private final RemoverProdutoUseCase removerProdutoUseCase;
-
-    private final CriarAlterarEstoqueUseCase criarAlterarEstoqueUseCase;
 
 
     @GetMapping
@@ -64,18 +60,6 @@ public class ProdutoController {
 
         log.trace("End idProduto={}", idProduto);
         return idProduto;
-    }
-
-    //FIXME: Este endpoint deveria estar em "estoque-service" - VERIFICADO QUE JA EXISTE EM ESTOQUE-SERVICE
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("{idProduto}/estoque")
-    public Long criarAlterarEstoque(@PathVariable Long idProduto, @Valid @RequestBody EstoqueJson estoqueJson) {
-        log.trace("Start id={}, estoqueDTO={}", idProduto, estoqueJson);
-
-        Long idEstoque = criarAlterarEstoqueUseCase.atualizarEstoque(estoqueJson.mapearParaEstoqueDomain(idProduto));
-
-        log.trace("End idEstoque={}", idEstoque);
-        return idEstoque;
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
