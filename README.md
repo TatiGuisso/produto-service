@@ -8,8 +8,8 @@ O Produto Service é um sistema de gestão de itens que oferece aos usuários a 
 ## Sumário
 * [Instruções](#instruções)
 * [Funcionalidades de Produto Service](#funcionalidades-de-produto-service)
-* [Tecnologias](#tecnologias)
-* [Desafios](#desafios)
+* [Tecnologias](#-tecnologias)
+* [Desafios](#-desafios)
 
 
 ## Instruções
@@ -212,11 +212,12 @@ curl --location --request DELETE 'http://localhost:42019/produtos/2'
 
 204 - _No Content_
 `- O produto foi inativado com sucesso`
+</details>
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
-
 ---------
+
 <a name="tecnologias"></a>
 ## 📍️ Tecnologias
 
@@ -227,5 +228,14 @@ curl --location --request DELETE 'http://localhost:42019/produtos/2'
 - Boas práticas da Linguagem/Framework
 - Clean architecture
 - Banco de Dados MySql
+
+<p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
+
+---------
+
+<a name="desafios"></a>
+## 📍️ Desafios
+
+A arquitetura do Spring Cloud como um todo, alinhado com o uso de Microserviços, nos obrigou a utilizar diversos patterns para que no mundo cloud tudo se conecta-se corretamente e claro, juntamente com as boas práticas, funcionassem perfeitamente como o esperado.
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
