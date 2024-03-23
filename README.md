@@ -16,8 +16,11 @@ O Produto Service é um sistema de gestão de itens que oferece aos usuários a 
 
 - Maven: Para build do projeto. **Para buildar:** mvn clean install
 - Foi utilizado Lombok, Validation e MySql, portanto é necessário adicionar os plugins na IDE
-- Antes de iniciar a instância do microserviço Produto-Service, é necessário garantir que os seguintes serviços estejam operacionais:
-	* Service Discovery  &  API Gateway
+- Antes de iniciar a instância dos Microserviços, é necessário garantir que os seguintes serviços estejam operacionais para garantir a operação adequada:</br>
+
+	* **Service Discovery** - Inicie o Service Discovery. Execute e verifique se pelo menos uma instância do Service Discovery está operacional.</br></br>
+	
+	* **API Gateway** - Inicie o API Gateway. Verifique se pelo menos uma instância do API Gateway está em execução.
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
@@ -221,7 +224,7 @@ curl --location --request DELETE 'http://localhost:42019/produtos/2'
 <a name="tecnologias"></a>
 ## 📍️ Tecnologias
 
-- A API foi construída em Java 17 utilizando Spring Framework 3.2.2
+- A API foi construída em Java 18 utilizando Spring Framework 3.2.2
 - Padrão REST na construção das rotas e retornos
 - SLF4J para registro de logs
 - Utilização de código limpo e princípios **SOLID**
