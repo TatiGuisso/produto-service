@@ -9,7 +9,7 @@ O Produto Service é um sistema de gestão de itens que oferece aos usuários a 
 * [Instruções](#instruções)
 * [Funcionalidades de Produto Service](#funcionalidades-de-produto-service)
 * [Tecnologias](#-tecnologias)
-* [Desafios](#-desafios)
+* [Ilustração do MS Produto Service](#-ilustração-do-ms-produto-service)
 
 
 ## Instruções
@@ -221,7 +221,6 @@ curl --location --request DELETE 'http://localhost:42019/produtos/2'
 
 ---------
 
-<a name="tecnologias"></a>
 ## 📍️ Tecnologias
 
 - A API foi construída em Java 18 utilizando Spring Framework 3.2.2
@@ -236,9 +235,8 @@ curl --location --request DELETE 'http://localhost:42019/produtos/2'
 
 ---------
 
-<a name="desafios"></a>
-## 📍️ Desafios
+## 📍️ Ilustração do MS Produto Service
 
-A arquitetura do Spring Cloud como um todo, alinhado com o uso de Microserviços, nos obrigou a utilizar diversos patterns para que no mundo cloud tudo se conecta-se corretamente e claro, juntamente com as boas práticas, funcionassem perfeitamente como o esperado.
+
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
