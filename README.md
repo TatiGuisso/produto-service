@@ -237,6 +237,6 @@ curl --location --request DELETE 'http://localhost:42019/produtos/2'
 
 ## 📍️ Ilustração do MS Produto Service
 
-
+![produto-service.png](document%2Fproduto-service.png)
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
