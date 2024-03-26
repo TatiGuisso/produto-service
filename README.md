@@ -44,6 +44,7 @@ O Produto Service é um sistema de gestão de itens que oferece aos usuários a 
 
 ```
 curl --location 'http://localhost:42019/produtos' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyUm9sZSI6IkFETUlOIiwidXNlcklkIjo0fQ.TpdJ2zQludisCSS8ujlNwn6Y_uaE5OZF-lfcHJMm0is' \
 --header 'Content-Type: application/json' \
 --data '{
     "nome": "Mouse",
@@ -168,6 +169,7 @@ curl --location 'http://localhost:42019/produtos'
 
 ```
 curl --location --request PUT 'http://localhost:42019/produtos/1' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyUm9sZSI6IkFETUlOIiwidXNlcklkIjo0fQ.TpdJ2zQludisCSS8ujlNwn6Y_uaE5OZF-lfcHJMm0is' \
 --header 'Content-Type: application/json' \
 --data '{
     "nome": "Mouse Alterado",
